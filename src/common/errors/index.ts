@@ -1,3 +1,3 @@
 export const AppErrors = {
-    'PasswordMismatch': 'Пароли не совпадают',
+    'PasswordMismatch': 'Введенные пароли не совпадают',
 }
