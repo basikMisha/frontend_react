@@ -1,6 +1,9 @@
 const HomePage = () => {
+    
     return (
-        <h1>Home page of this app</h1>
+        <>
+            <h1>Home page of this app</h1>
+        </>
     )
 }
 
