@@ -17,7 +17,9 @@ const LayoutComponent = ({ children }: ILayout) => {
                 </>
             ) : (
                 <>
-                    <Box display={isNonMobile ? 'flex' : 'block'}
+                    <Box 
+                        display={isNonMobile ? 'flex' : 'block'}
+                        justifyContent='space-between'
                         width='100%'
                         height='100%'
                     >

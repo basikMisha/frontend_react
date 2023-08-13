@@ -3,60 +3,43 @@ import { useAppSelector } from "../../utils/hook";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import SearchIcon from "@mui/icons-material/Search";
-import  NotificationsNoneIcon  from "@mui/icons-material/NotificationsNone";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
+import { useStyles } from "./styles";
 
 const TopBarComponent = () => {
-    
+
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode: any = useContext(ColorModeContext);
+    const {classes} = useStyles();
+    const user = useAppSelector((state) => state.auth.user );
+    console.log(user.email);
     return (
-        <Box sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            px: 4,
-            py: 3,
-        }}
-        >
-            <Grid>Welcome</Grid>
+        <Box className={classes.root}>
+            <Grid>Welcome </Grid>
             <Box display='flex'>
-                <Grid 
-                sx={{
-                    pr: '28px',
-                    borderRight: `1px solid ${colors.borderColor}`
-                }}
-                onClick={colorMode.toggleColorMode}>
-                    <IconButton 
+                <Grid className={classes.iconBlock}
+                >
+                    <IconButton
+                        onClick={colorMode.toggleColorMode}
                         sx={{
-                            mr: '40px'
+                            mr: '40px',
                         }}
                     >
-                        {theme.palette.mode === 'dark' ? (<DarkModeIcon/>) : (<LightModeIcon/>)}
+                        {theme.palette.mode === 'dark' ? (<DarkModeIcon />) : (<LightModeIcon />)}
                     </IconButton>
                     <IconButton>
-                        <NotificationsNoneIcon/>
+                        <NotificationsNoneIcon />
                     </IconButton>
                 </Grid>
-                <Grid sx={{
-                    display: 'flex',
-                    backgroundColor: `${colors.primary[600]}`,
-                    borderRadius: 2,
-                    ml: '28px',
-
-                }}>
-                    <IconButton sx={{
-                        '&:hover': {background: 'transparent'}
-                    }}>
-                        <SearchIcon/>
+                <Grid className={classes.searchBlock}>
+                    <IconButton className={classes.searchIcon}>
+                        <SearchIcon />
                     </IconButton>
-                    <InputBase 
-                        sx={{
-                            px: '16px',
-                            py: '8px',
-                        }}
+                    <InputBase
+                        className={classes.searchInput}
                         placeholder="Поиск"
                     />
                 </Grid>
