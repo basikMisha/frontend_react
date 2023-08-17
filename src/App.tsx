@@ -15,24 +15,24 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <LayoutComponent>
-          <div>
-            <Routes>
-              <Route element={<PrivateRoute />}>
+        <>
+          <Routes>
+            <Route element={<LayoutComponent />}>
+              {/* <Route element={<PrivateRoute />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/watchlist" element={<WatchlistComponent />} />
                 <Route path="/settings" element={<SettingsComponet />} />
                 <Route path="/news" element={<NewsComponent />} />
-              </Route>
-              {/* <Route path="/" element={<HomePage />} />
+              </Route> */}
+              <Route path="/" element={<HomePage />} />
               <Route path="/watchlist" element={<WatchlistComponent />} />
               <Route path="/settings" element={<SettingsComponet />} />
-              <Route path="/news" element={<NewsComponent />} /> */}
+              <Route path="/news" element={<NewsComponent />} />
               <Route path="login" element={<AuthRootComponent />} />
               <Route path="register" element={<AuthRootComponent />} />
-            </Routes>
-          </div>
-        </LayoutComponent>
+            </Route>
+          </Routes>
+        </>
       </ThemeProvider>
     </ColorModeContext.Provider>
 
