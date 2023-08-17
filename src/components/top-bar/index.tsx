@@ -1,25 +1,36 @@
-import { Box, Grid, IconButton, InputBase, useTheme } from "@mui/material";
+import { AppBar, Box, Grid, IconButton, InputBase, Toolbar, Typography, useTheme } from "@mui/material";
 import { useAppSelector } from "../../utils/hook";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { MenuOutlined } from "@mui/icons-material";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
 import { useStyles } from "./styles";
+import FlexBetween from "../flexBetween";
 
-const TopBarComponent = () => {
-
+const TopBarComponent = (props: any) => {
+    const {isOpen, setIsOpen} = props;
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode: any = useContext(ColorModeContext);
     const {classes} = useStyles();
     const user = useAppSelector((state) => state.auth.user );
-    console.log(user.email);
+    
     return (
-        <Box className={classes.root}>
-            <Grid>Welcome </Grid>
-            <Box display='flex'>
+        <AppBar className={classes.root} position="static">
+            <Toolbar className={classes.toolBar}>
+                <FlexBetween>
+                    <MenuOutlined 
+                        sx={{
+                            cursor: 'pointer',
+                            mr: '10px'
+                        }}
+                        onClick={() => setIsOpen(!isOpen)}/>
+                    <Typography variant="h4">Welcome, Hui</Typography>
+                </FlexBetween>
+                <Box display='flex'>
                 <Grid className={classes.iconBlock}
                 >
                     <IconButton
@@ -44,7 +55,16 @@ const TopBarComponent = () => {
                     />
                 </Grid>
             </Box>
-        </Box>
+            </Toolbar>
+        </AppBar>
+        // <Box className={classes.root}
+        //      sx={{
+        //         flexGrow: 1,
+        //      }}
+        // >
+        //     <Grid>Welcome </Grid>
+            
+        // </Box>
     )
 }
 
