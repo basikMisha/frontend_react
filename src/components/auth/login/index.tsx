@@ -4,7 +4,7 @@ import { IPropsLogin } from "../../../common/types/auth";
 import React from "react";
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-    const {setEmail, setPassword, navigate} = props;
+    const {setEmail, setPassword, navigate, register, errors} = props;
     const theme = createTheme({
         typography: {
             fontFamily: ['Montserrat'].join(' ,'),
@@ -25,11 +25,23 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                     Введите ваш логин и пароль
                 </Typography>
             
-            <TextField fullWidth={true} margin="normal" label="Email" variant="outlined" placeholder="Введите email" 
-                onChange={(e) => setEmail(e.target.value)}
+            <TextField type="email" fullWidth={true} margin="normal" label="Email" variant="outlined" placeholder="Введите email" 
+                
+                error={!!errors.email}
+                helperText={errors.email ? `${errors.email.message}` : ''}
+                
+                {...register('email', {
+                    required: 'Обязательное поле'
+                })}
             />
             <TextField type="password" fullWidth={true} margin="normal" label="Password" variant="outlined" placeholder="Введите пароль" 
-                onChange={(e) => setPassword(e.target.value)}
+                // onChange={(e) => setPassword(e.target.value)}
+                error={!!errors.password}
+                helperText={errors.password ? `${errors.password.message}` : ''}
+                {...register('password', {
+                    required: 'Обязательное поле',
+                    // minLength: 6
+                })}
             />
             <Button 
             type="submit"

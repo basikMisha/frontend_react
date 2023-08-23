@@ -18,16 +18,16 @@ function App() {
         <>
           <Routes>
             <Route element={<LayoutComponent />}>
-              {/* <Route element={<PrivateRoute />}>
+              <Route element={<PrivateRoute />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/watchlist" element={<WatchlistComponent />} />
                 <Route path="/settings" element={<SettingsComponet />} />
                 <Route path="/news" element={<NewsComponent />} />
-              </Route> */}
-              <Route path="/" element={<HomePage />} />
+              </Route>
+              {/* <Route path="/" element={<HomePage />} />
               <Route path="/watchlist" element={<WatchlistComponent />} />
               <Route path="/settings" element={<SettingsComponet />} />
-              <Route path="/news" element={<NewsComponent />} />
+              <Route path="/news" element={<NewsComponent />} /> */}
               <Route path="login" element={<AuthRootComponent />} />
               <Route path="register" element={<AuthRootComponent />} />
             </Route>
