@@ -8,6 +8,7 @@ import { instance } from "../../utils/axios";
 import { useAppDispatch } from "../../utils/hook";
 import { login } from "../../store/slice/auth";
 import { AppErrors } from "../../common/errors";
+import { useForm } from "react-hook-form";
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
     const location = useLocation();
@@ -16,16 +17,23 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     const [repeatPassword, setRepeatPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [userName, setUserName] = useState('');
-    const navigate = useNavigate()
-    const dispatch = useAppDispatch()
-
-    const handleSubmit = async (e: {preventDefault: () => void;}) => {
-        e.preventDefault();
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const {
+        register, 
+        formState:{
+            errors
+        },
+        handleSubmit
+        } = useForm();
+        console.log(errors);
+    const handleSubmitForm = async (data: any) => {
+        console.log('data:',data);
         if(location.pathname === '/login') {
             try {
                 const userData = {
-                    email, 
-                    password,
+                    email: data.email, 
+                    password: data.password,
                 }
                 const user = await instance.post('auth/login', userData);
                 await dispatch(login(user.data));
@@ -58,7 +66,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     }
     return (
        <div className="root">
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit(handleSubmitForm)} className="form">
             <Box
                 sx={{
                     display: 'flex',
@@ -72,7 +80,13 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     boxShadow: '5px 5px 10px #ccc ',
                 }}
             >
-              {location.pathname === '/login' ? <LoginPage setEmail={setEmail} setPassword={setPassword} navigate={navigate}/> 
+              {location.pathname === '/login' ? <LoginPage 
+                setEmail={setEmail} 
+                setPassword={setPassword} 
+                navigate={navigate}
+                register={register}
+                errors={errors}
+                /> 
               : location.pathname === '/register' ? <RegisterPage 
                     setEmail={setEmail}
                     setPassword={setPassword}
