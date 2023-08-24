@@ -4,11 +4,8 @@ import { IPropsRegister } from "../../../common/types/auth";
 import React from "react";
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-    const {setEmail, 
-        setPassword, 
-        setRepeatPassword, 
-        setFirstName, 
-        setUserName,
+    const {errors,
+        register, 
         navigate
     } = props
     const theme = createTheme({
@@ -18,7 +15,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
     });
     return (
         <>
-            <ThemeProvider theme={theme}>
+            {/* <ThemeProvider theme={theme}> */}
                 <Typography 
                     variant="h2" 
                     padding={3}
@@ -32,19 +29,29 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 </Typography>
             
             <TextField fullWidth={true} margin="normal" label="Name" variant="outlined" placeholder="Введите ваше имя" 
-                onChange={(e) => setFirstName(e.target.value)}
+                error={!!errors.name}
+                helperText={errors.name ? `${errors.name.message}` : ''}
+                {...register('name')}
             />
-             <TextField fullWidth={true} margin="normal" label="UserName" variant="outlined" placeholder="Введите username" 
-                onChange={(e) => setUserName(e.target.value)}
+             <TextField fullWidth={true} margin="normal" label="UserName" variant="outlined" placeholder="Введите имя пользователя" 
+                error={!!errors.username}
+                helperText={errors.username ? `${errors.username.message}` : ''}
+                {...register('username')}
             /> 
             <TextField fullWidth={true} margin="normal" label="Email" variant="outlined" placeholder="Введите email" 
-                onChange={(e) => setEmail(e.target.value)}
+                error={!!errors.email}
+                helperText={errors.email ? `${errors.email.message}` : ''}
+                {...register('email')}
             />
             <TextField type="password" fullWidth={true} margin="normal" label="Password" variant="outlined" placeholder="Введите пароль" 
-                onChange={(e) => setPassword(e.target.value)}
+                error={!!errors.password}
+                helperText={errors.password ? `${errors.password.message}` : ''}
+                {...register('password')}
             />
             <TextField type="password" fullWidth={true} margin="normal" label="Password" variant="outlined" placeholder="Повторите пароль" 
-                onChange={(e) => setRepeatPassword(e.target.value)}
+                error={!!errors.repeatedPassword}
+                helperText={errors.repeatedPassword ? `${errors.repeatedPassword.message}` : ''}
+                {...register('repeatedPassword')}
             />
             
             <Button 
@@ -55,7 +62,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 marginTop: 1,
             }}
             >Регистрация</Button>
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
             <Typography 
                 variant="body1" 
                 sx={{
