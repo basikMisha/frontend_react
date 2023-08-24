@@ -25,23 +25,18 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                     Введите ваш логин и пароль
                 </Typography>
             
-            <TextField type="email" fullWidth={true} margin="normal" label="Email" variant="outlined" placeholder="Введите email" 
+            <TextField  fullWidth={true} margin="normal" label="Email" variant="outlined" placeholder="Введите email" 
                 
                 error={!!errors.email}
                 helperText={errors.email ? `${errors.email.message}` : ''}
                 
-                {...register('email', {
-                    required: 'Обязательное поле'
-                })}
+                {...register('email')}
             />
             <TextField type="password" fullWidth={true} margin="normal" label="Password" variant="outlined" placeholder="Введите пароль" 
                 // onChange={(e) => setPassword(e.target.value)}
                 error={!!errors.password}
                 helperText={errors.password ? `${errors.password.message}` : ''}
-                {...register('password', {
-                    required: 'Обязательное поле',
-                    // minLength: 6
-                })}
+                {...register('password')}
             />
             <Button 
             type="submit"
