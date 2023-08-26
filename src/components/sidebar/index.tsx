@@ -1,7 +1,6 @@
 import {
     Box,
     Drawer,
-    Divider,
     IconButton,
     List,
     ListItem,
@@ -12,9 +11,7 @@ import {
     useTheme
 } from '@mui/material';
 import {
-    HomeOutlined,
     ChevronLeftOutlined,
-    ChevronRightOutlined,
     LogoutOutlined
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -24,19 +21,20 @@ import { navMenu } from '../../common/moks/navigate';
 import SidebarLogo from '../../assets/images/sidebar/logo.svg'
 import { tokens } from '../../theme';
 import { useStyles } from './styles';
+import { ISidebarProps } from '../../common/types/sidebar';
 
 
-const SidebarComponent = (props: any) => {
+const SidebarComponent: React.FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
     const [active, setActive] = useState('');
     const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const {classes} = useStyles();
+    const { classes } = useStyles();
 
     useEffect(() => {
-        setActive(pathname.substring(1))
+        setActive(pathname)
     }, [pathname]);
 
     const renderMenu = navMenu.map((menuItem): JSX.Element => {
@@ -47,13 +45,14 @@ const SidebarComponent = (props: any) => {
             >
                 <ListItemButton
                     onClick={() => navigate(`${menuItem.path}`)}
+                    className={active === menuItem.path ? `${classes.active}` : ''}
                     sx={{
                         px: '16px',
                         py: '8px',
                         borderRadius: '4px',
                         '&:hover': {
-                            backgroundColor: '#1900D5 !important',
-                            color: '#FFFFFF !important',
+                            backgroundColor: colors.blue,
+                            color: colors.white.DEFAULT,
                             '.MuiSvgIcon-root': {
                                 color: colors.white.DEFAULT
                             }
@@ -87,7 +86,7 @@ const SidebarComponent = (props: any) => {
                                 backgroundColor: theme.palette.primary.main,
                                 boxSizing: 'border-box',
                                 width: drawerWidth,
-                                
+
                             }
                         }}
                     >
@@ -97,7 +96,7 @@ const SidebarComponent = (props: any) => {
                                     <Box
                                         onClick={() => navigate('/')}
                                         className={classes.sideLogo}
-                                        >
+                                    >
                                         <img src={SidebarLogo} alt='logo' />
                                         <Typography
                                             variant='h1'
@@ -126,14 +125,14 @@ const SidebarComponent = (props: any) => {
                         >
                             <List>
                                 <ListItem>
-                                    <ListItemButton 
+                                    <ListItemButton
                                         sx={{
                                             px: '16px',
                                             py: '8px',
                                             borderRadius: '4px',
                                             '&:hover': {
-                                                backgroundColor: '#1900D5 !important',
-                                                color: '#FFFFFF !important',
+                                                backgroundColor: colors.blue,
+                                                color: colors.white.DEFAULT,
                                                 '.MuiSvgIcon-root': {
                                                     color: colors.white.DEFAULT
                                                 }
@@ -141,7 +140,7 @@ const SidebarComponent = (props: any) => {
                                         }}
                                     >
                                         <ListItemIcon>
-                                            <LogoutOutlined/>
+                                            <LogoutOutlined />
                                         </ListItemIcon>
                                         <ListItemText>
                                             <Typography>

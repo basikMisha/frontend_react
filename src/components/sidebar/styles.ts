@@ -18,6 +18,11 @@ export const useStyles = makeStyles()((theme) => {
         },
         navList: {
             marginBottom: '55px',
+        },
+        active: {
+            backgroundColor: '#1900D5',
+            color: '#FFFFFF',
+            borderRadius: '4px',
         }
     }
 })

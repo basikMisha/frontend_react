@@ -9,8 +9,9 @@ import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
 import { useStyles } from "./styles";
 import FlexBetween from "../flexBetween";
+import { ITopBarProps } from "../../common/types/topbar";
 
-const TopBarComponent = (props: any) => {
+const TopBarComponent: React.FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
     const {isOpen, setIsOpen} = props;
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);

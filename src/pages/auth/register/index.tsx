@@ -1,21 +1,20 @@
 import { ThemeProvider } from "@emotion/react";
-import { Button, TextField, Typography, createTheme } from "@mui/material";
+import { Button, TextField, Typography, createTheme, useTheme } from "@mui/material";
 import { IPropsRegister } from "../../../common/types/auth";
 import React from "react";
+import { useStyles } from "../styles";
+import { tokens } from "../../../theme";
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
     const {errors,
         register, 
         navigate
     } = props
-    const theme = createTheme({
-        typography: {
-            fontFamily: ['Montserrat'].join(' ,'),
-        },
-    });
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+    const {classes} = useStyles();
     return (
         <>
-            {/* <ThemeProvider theme={theme}> */}
                 <Typography 
                     variant="h2" 
                     padding={3}
@@ -60,9 +59,9 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
             sx={{
                 width: '40%',
                 marginTop: 1,
+                backgroundColor: colors.blue
             }}
-            >Регистрация</Button>
-            {/* </ThemeProvider> */}
+            >Зарегистрироваться</Button>
             <Typography 
                 variant="body1" 
                 sx={{
@@ -70,7 +69,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 
             }}> Уже есть аккаунт? <span 
             onClick={() => navigate('/login')}
-            className="loginFormText">Авторизация</span></Typography>
+            className={classes.loginFormText}>Авторизация</span></Typography>
         </>
     )
 }
