@@ -1,13 +1,13 @@
-import HomePage from "./components/homepage/HomePage"
+import HomePage from "./pages/homepage/HomePage"
 import { Routes, Route } from 'react-router-dom'
 import PrivateRoute from "./utils/router/privateRoute"
-import AuthRootComponent from "./components/auth"
+import AuthRootComponent from "./pages/auth"
 import { ColorModeContext, useMode } from "./theme"
 import { ThemeProvider, CssBaseline } from "@mui/material"
 import LayoutComponent from "./components/layout"
-import WatchlistComponent from "./components/watchlist"
-import SettingsComponet from "./components/settings"
-import NewsComponent from "./components/news"
+import WatchlistComponent from "./pages/watchlist"
+import SettingsComponet from "./pages/settings"
+import NewsComponent from "./pages/news"
 
 function App() {
   const [theme, colorMode] = useMode()
