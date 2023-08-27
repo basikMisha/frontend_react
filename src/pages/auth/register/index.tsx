@@ -4,11 +4,13 @@ import { IPropsRegister } from "../../../common/types/auth";
 import React from "react";
 import { useStyles } from "../styles";
 import { tokens } from "../../../theme";
+import AppLoadingButton from "../../../components/loading-btn";
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
     const {errors,
         register, 
-        navigate
+        navigate,
+        loading
     } = props
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -53,7 +55,8 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 {...register('repeatedPassword')}
             />
             
-            <Button 
+            <AppLoadingButton
+            loading={loading} 
             type="submit"
             variant="contained"
             sx={{
@@ -61,7 +64,7 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 marginTop: 1,
                 backgroundColor: colors.blue
             }}
-            >Зарегистрироваться</Button>
+            >Зарегистрироваться</AppLoadingButton>
             <Typography 
                 variant="body1" 
                 sx={{

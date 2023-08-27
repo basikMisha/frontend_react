@@ -17,7 +17,7 @@ const TopBarComponent: React.FC<ITopBarProps> = (props: ITopBarProps): JSX.Eleme
     const colors = tokens(theme.palette.mode);
     const colorMode: any = useContext(ColorModeContext);
     const {classes} = useStyles();
-    const user = useAppSelector((state) => state.auth.user );
+    const user = sessionStorage.getItem('name');
     
     return (
         <AppBar className={classes.root} position="static">
@@ -29,7 +29,7 @@ const TopBarComponent: React.FC<ITopBarProps> = (props: ITopBarProps): JSX.Eleme
                             mr: '10px'
                         }}
                         onClick={() => setIsOpen(!isOpen)}/>
-                    <Typography variant="h4">Welcome, Hui</Typography>
+                    <Typography variant="h4">Welcome, {user}</Typography>
                 </FlexBetween>
                 <Box display='flex'>
                 <Grid className={classes.iconBlock}

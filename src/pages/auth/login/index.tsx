@@ -1,12 +1,12 @@
-import { ThemeProvider } from "@emotion/react";
 import { TextField, Button, Typography, useTheme} from "@mui/material";
 import { IPropsLogin } from "../../../common/types/auth";
 import React from "react";
 import { useStyles } from "../styles";
 import { tokens } from "../../../theme";
+import AppLoadingButton from "../../../components/loading-btn";
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-    const { setEmail, setPassword, navigate, register, errors } = props;
+    const { setEmail, setPassword, navigate, register, errors, loading } = props;
     const { classes } = useStyles();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -37,7 +37,8 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 helperText={errors.password ? `${errors.password.message}` : ''}
                 {...register('password')}
             />
-            <Button
+            <AppLoadingButton
+                loading={loading}
                 type="submit"
                 variant="contained"
                 sx={{
@@ -46,7 +47,8 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                     backgroundColor: colors.blue,
                    
                 }}
-            >Войти</Button>
+            >Войти</AppLoadingButton>
+           
 
             <Typography
                 variant="body1"
