@@ -1,4 +1,4 @@
-import HomePage from "./pages/homepage/HomePage"
+import HomePage from "./pages/homepage"
 import { Routes, Route } from 'react-router-dom'
 import PrivateRoute from "./utils/router/privateRoute"
 import AuthRootComponent from "./pages/auth"
