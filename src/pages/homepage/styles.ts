@@ -17,7 +17,7 @@ export const useStyles = makeStyles()((theme) => {
             height: '80%',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            paddingBottom: '20px',
+            paddingBottom: '35px',
         },
         cardPrice: {
             fontSize: 32,
