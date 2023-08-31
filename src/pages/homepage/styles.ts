@@ -6,6 +6,10 @@ import { tokens } from "../../theme"
 export const useStyles = makeStyles()((theme) => {
     const colors = tokens(theme.palette.mode);
     return {
+        root: {
+            flexGrow: 1,
+            padding: 32,
+        },
         assetName: {
             fontSize: 25,
             fontWeight: 600,

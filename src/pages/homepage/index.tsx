@@ -5,8 +5,9 @@ import Grid from '@mui/material/Grid';
 import { Box, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
 import { useStyles } from './styles';
+import AreaChart from '../../components/charts/area-chart';
 
-const HomePage = () => {
+const HomePage: React.FC = (): JSX.Element => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const { classes } = useStyles();
@@ -31,10 +32,11 @@ const HomePage = () => {
     }, [favoriteAssetNames, fetchData]);
 
     const renderFavBlock = newFav.map((elem: any) => {
+        console.log('elem', elem);
         const currentPrice = elem.data.prices[0];
         const currentCap = elem.data.market_caps[0];
         return (
-            <Grid item xs={12} sm={6} lg={6} key={crypto.randomUUID()}>
+            <Grid item xs={12} sm={6} lg={6} key={elem.name}>
                 <Grid
                     container
                     sx={{
@@ -53,7 +55,7 @@ const HomePage = () => {
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <h5>Chart</h5>
+                        <AreaChart data={elem.data.prices}/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -62,10 +64,7 @@ const HomePage = () => {
 
     return (
         <>
-            <Box sx={{
-                flexGrow: 1,
-                padding: '32px',
-            }}>
+            <Box className={classes.root}>
                 <Grid container spacing={2}>
                     {renderFavBlock}
                 </Grid>
