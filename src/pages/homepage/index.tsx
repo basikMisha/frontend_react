@@ -33,8 +33,13 @@ const HomePage: React.FC = (): JSX.Element => {
 
     const renderFavBlock = newFav.map((elem: any) => {
         console.log('elem', elem);
-        const currentPrice = elem.data.prices[0];
-        const currentCap = elem.data.market_caps[0];
+        const currentPrice = elem.singleAsset.map((elem: any) => {
+            return elem.current_price
+        });
+       
+        const priceChanges = elem.singleAsset.map((elem: any) => {
+            return elem.price_change_percentage_24h
+        })
         return (
             <Grid item xs={12} sm={6} lg={6} key={elem.name}>
                 <Grid
@@ -50,12 +55,12 @@ const HomePage: React.FC = (): JSX.Element => {
                     <Grid item xs={12} sm={6} lg={6} >
                         <h3 className={classes.assetName}>{elem.name}</h3>
                         <div className={classes.itemDetails}>
-                            <h3 className={classes.cardPrice}>{currentPrice[1].toFixed(2)}$</h3>
-                            <p className={classes.cardCap}>{currentCap[1].toFixed(0)}$</p>
+                            <h3 className={classes.cardPrice}>{currentPrice}$</h3>
+                            <p className={classes.cardCap}>{Number(priceChanges).toFixed(3)}%</p>
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <AreaChart data={elem.data.prices}/>
+                        <AreaChart data={elem.data}/>
                     </Grid>
                 </Grid>
             </Grid>
