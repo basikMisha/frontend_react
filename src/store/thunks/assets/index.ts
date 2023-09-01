@@ -1,15 +1,21 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { coinGeckoAPI } from '../../../utils/axios';
 
 export const getFavAssets = createAsyncThunk(
     'coins/markets',
-    async (data: string, {rejectWithValue}) => {
+    async (data: string, { rejectWithValue }) => {
         try {
-          const assets = await coinGeckoAPI.get(`/coins/${data}/market_chart?vs_currency=usd&days=90`);
-          return {
-            name: data,
-            data: assets.data,
-          }
+            const assets = await coinGeckoAPI.get(`/coins/${data}/market_chart?vs_currency=usd&days=90`);
+            const singleAsset = await coinGeckoAPI
+                .get(`/coins/markets?vs_currency=usd&ids=${data}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+            return {
+                name: data,
+                data: assets.data.prices.slice(
+                    assets.data.prices.length - 30,
+                    assets.data.prices.length -1
+                ),
+                singleAsset: singleAsset.data,
+            }
         } catch (error: any) {
             if (error.response && error.response.data.message) {
                 return rejectWithValue(error.response.data.message)
