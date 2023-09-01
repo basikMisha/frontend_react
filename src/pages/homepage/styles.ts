@@ -21,18 +21,31 @@ export const useStyles = makeStyles()((theme) => {
             height: '80%',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            paddingBottom: '20px',
+            paddingBottom: '30px',
         },
         cardPrice: {
             fontSize: 32,
             fontWeight: 700,
             lineHeight: '48px',
         },
-        cardCap: {
+        priceTrend: {
+            width: '20%',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '2px',
+            borderRadius: '4px',
             color: colors.secondary.DEFAULT,
             fontWeight: 400,
             fontSize: 18,
             lineHeight: '21px'
+        },
+        trendUp: {
+            backgroundColor: '#A9FFA7',
+            color: '#037400'
+        },
+        trendDown: {
+            backgroundColor: '#FFA7A7',
+            color: '#740000'
         }
     }
 })
