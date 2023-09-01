@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import { Box, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
 import { useStyles } from './styles';
+import TrendUp from '../../assets/images/chart/trend-up.svg';
+import TrendDown from '../../assets/images/chart/trend-down.svg';
 import AreaChart from '../../components/charts/area-chart';
 
 const HomePage: React.FC = (): JSX.Element => {
@@ -15,7 +17,7 @@ const HomePage: React.FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const fetchDataRef = useRef(false);
     const favoriteAssetNames = useMemo(() => ['bitcoin', 'ethereum'], []);
-    const newFav = favorites.filter((value, index, self) => 
+    const newFav = favorites.filter((value, index, self) =>
         index === self.findIndex((ind) => ind.name === value.name)
     )
 
@@ -36,7 +38,7 @@ const HomePage: React.FC = (): JSX.Element => {
         const currentPrice = elem.singleAsset.map((elem: any) => {
             return elem.current_price
         });
-       
+
         const priceChanges = elem.singleAsset.map((elem: any) => {
             return elem.price_change_percentage_24h
         })
@@ -56,11 +58,21 @@ const HomePage: React.FC = (): JSX.Element => {
                         <h3 className={classes.assetName}>{elem.name}</h3>
                         <div className={classes.itemDetails}>
                             <h3 className={classes.cardPrice}>{currentPrice}$</h3>
-                            <p className={classes.cardCap}>{Number(priceChanges).toFixed(3)}%</p>
+                            <Box className={
+                                priceChanges > 0 ? `${classes.priceTrend} ${classes.trendUp}`
+                                : `${classes.priceTrend} ${classes.trendDown}`
+                            }>
+                                {priceChanges > 0 ? (
+                                    <img src={TrendUp} alt='trend up'/>
+                                ) : (
+                                    <img src={TrendDown} alt="trend down" />
+                                )}
+                                <span>{Number(priceChanges).toFixed(3)}%</span>
+                            </Box>
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <AreaChart data={elem.data}/>
+                        <AreaChart data={elem.data} />
                     </Grid>
                 </Grid>
             </Grid>
