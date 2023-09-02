@@ -10,7 +10,7 @@ export const getFavAssets = createAsyncThunk(
                 .get(`/coins/markets?vs_currency=usd&ids=${data}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
             return {
                 name: data,
-                data: assets.data.prices.slice(
+                price_chart_data: assets.data.prices.slice(
                     assets.data.prices.length - 30,
                     assets.data.prices.length -1
                 ),
