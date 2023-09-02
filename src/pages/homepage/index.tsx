@@ -8,12 +8,14 @@ import { useStyles } from './styles';
 import TrendUp from '../../assets/images/chart/trend-up.svg';
 import TrendDown from '../../assets/images/chart/trend-down.svg';
 import AreaChart from '../../components/charts/area-chart';
+import LineChart from '../../components/charts/line-chart';
+import { IChartData } from '../../common/types/assets';
 
 const HomePage: React.FC = (): JSX.Element => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const { classes } = useStyles();
-    const favorites: any[] = useAppSelector(state => state.assets.favoriteAssets);
+    const favorites: IChartData = useAppSelector(state => state.assets.favoriteAssets);
     const dispatch = useAppDispatch();
     const fetchDataRef = useRef(false);
     const favoriteAssetNames = useMemo(() => ['bitcoin', 'ethereum'], []);
@@ -60,19 +62,19 @@ const HomePage: React.FC = (): JSX.Element => {
                             <h3 className={classes.cardPrice}>{currentPrice}$</h3>
                             <Box className={
                                 priceChanges > 0 ? `${classes.priceTrend} ${classes.trendUp}`
-                                : `${classes.priceTrend} ${classes.trendDown}`
+                                    : `${classes.priceTrend} ${classes.trendDown}`
                             }>
                                 {priceChanges > 0 ? (
-                                    <img src={TrendUp} alt='trend up'/>
+                                    <img src={TrendUp} alt='trend up' />
                                 ) : (
                                     <img src={TrendDown} alt="trend down" />
                                 )}
-                                <span>{Number(priceChanges).toFixed(3)}%</span>
+                                <span>{Number(priceChanges).toFixed(2)}%</span>
                             </Box>
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <AreaChart data={elem.data} />
+                        <AreaChart data={elem.price_chart_data} />
                     </Grid>
                 </Grid>
             </Grid>
@@ -82,8 +84,13 @@ const HomePage: React.FC = (): JSX.Element => {
     return (
         <>
             <Box className={classes.root}>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} className={classes.areaChart}>
                     {renderFavBlock}
+                </Grid>
+                <Grid container className={classes.lineChart}>
+                    <Grid item xs={12} sm={12} lg={12}>
+                        {newFav.length && <LineChart data={newFav}/>}
+                    </Grid>
                 </Grid>
             </Box>
         </>

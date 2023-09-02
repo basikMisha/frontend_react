@@ -46,6 +46,19 @@ export const useStyles = makeStyles()((theme) => {
         trendDown: {
             backgroundColor: '#FFA7A7',
             color: '#740000'
+        },
+        lineChart: {
+            backgroundColor: `${
+                theme.palette.mode === 'light' ?
+                colors.primary.DEFAULT : colors.primary[600]
+            }`,
+            padding: '20px 16px',
+            minHeight: '270px',
+            border: `1px solid ${colors.borderColor}`,
+            borderRadius: '12px',
+        },
+        areaChart: {
+            marginBottom: '32px',
         }
     }
 })
