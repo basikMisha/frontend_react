@@ -9,13 +9,13 @@ import TrendUp from '../../assets/images/chart/trend-up.svg';
 import TrendDown from '../../assets/images/chart/trend-down.svg';
 import AreaChart from '../../components/charts/area-chart';
 import LineChart from '../../components/charts/line-chart';
-import { IChartData } from '../../common/types/assets';
+import { IChartData, ISingleAsset } from '../../common/types/assets';
 
 const HomePage: React.FC = (): JSX.Element => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const { classes } = useStyles();
-    const favorites: IChartData = useAppSelector(state => state.assets.favoriteAssets);
+    const favorites: IChartData[] = useAppSelector(state => state.assets.favoriteAssets);
     const dispatch = useAppDispatch();
     const fetchDataRef = useRef(false);
     const favoriteAssetNames = useMemo(() => ['bitcoin', 'ethereum'], []);
@@ -35,15 +35,14 @@ const HomePage: React.FC = (): JSX.Element => {
         fetchData(favoriteAssetNames);
     }, [favoriteAssetNames, fetchData]);
 
-    const renderFavBlock = newFav.map((elem: any) => {
+    const renderFavBlock = newFav.map((elem: IChartData) => {
         console.log('elem', elem);
-        const currentPrice = elem.singleAsset.map((elem: any) => {
-            return elem.current_price
+        let currentPrice = 0;
+        let priceChanges = 0;
+        elem.singleAsset.forEach((elem: ISingleAsset) => {
+            currentPrice = elem.current_price
+            priceChanges = elem.price_change_percentage_24h
         });
-
-        const priceChanges = elem.singleAsset.map((elem: any) => {
-            return elem.price_change_percentage_24h
-        })
         return (
             <Grid item xs={12} sm={6} lg={6} key={elem.name}>
                 <Grid
@@ -61,7 +60,8 @@ const HomePage: React.FC = (): JSX.Element => {
                         <div className={classes.itemDetails}>
                             <h3 className={classes.cardPrice}>{currentPrice}$</h3>
                             <Box className={
-                                priceChanges > 0 ? `${classes.priceTrend} ${classes.trendUp}`
+                                priceChanges > 0 
+                                    ? `${classes.priceTrend} ${classes.trendUp}`
                                     : `${classes.priceTrend} ${classes.trendDown}`
                             }>
                                 {priceChanges > 0 ? (
