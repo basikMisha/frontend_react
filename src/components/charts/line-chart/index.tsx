@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -10,7 +9,6 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 import moment from 'moment';
 
 ChartJS.register(
@@ -29,19 +27,26 @@ const LineChart = (props: any) => {
     const {data} = props;
     const options = {
         responsive: true,
+        scales: {
+            x: {
+                grid: {
+                    display: false,
+                },
+            },
+        },
         plugins: {
             legend: {
-                display: false,
+                position: 'top' as const,
             },
         },
     };
     const chartData = {
-        labels: data[0].price_chart_data.map((elem: any) =>
+        labels: data[1].price_chart_data.map((elem: any) =>
             moment(elem[0]).format('DD.MM.YY'),
         ),
         datasets: [{
-            label: 'Цена',
-            data: data[0].price_chart_data.map((elem: any) =>
+            label: data[1].name.charAt(0).toUpperCase() + data[1].name.slice(1),
+            data: data[1].price_chart_data.map((elem: any) =>
                 elem[1],
             ),
             borderColor: 'rgb(255, 99, 132)',
