@@ -41,12 +41,12 @@ const LineChart = (props: any) => {
         },
     };
     const chartData = {
-        labels: data[1].price_chart_data.map((elem: any) =>
-            moment(elem[0]).format('DD.MM.YY'),
+        labels: data[0].price_chart_data.map((element: any) =>
+            moment(element[0]).format('DD.MM.YY'),
         ),
         datasets: [{
-            label: data[1].name.charAt(0).toUpperCase() + data[1].name.slice(1),
-            data: data[1].price_chart_data.map((elem: any) =>
+            label: data[0].name.charAt(0).toUpperCase() + data[0].name.slice(1),
+            data: data[0].price_chart_data.map((elem: any) =>
                 elem[1],
             ),
             borderColor: 'rgb(255, 99, 132)',

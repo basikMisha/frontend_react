@@ -15,6 +15,7 @@ import TopPriceComponent from '../../components/top-price';
 const HomePage: React.FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const favorites: IChartData[] = useAppSelector((state) => state.assets.favoriteAssets);
+    
     const assetsArray: ISingleAsset[] = useAppSelector(
         (state) => state.assets.assets,
     )
@@ -27,9 +28,12 @@ const HomePage: React.FC = (): JSX.Element => {
     const fetchDataRef = useRef(false);
     const favoriteAssetNames = useMemo(() => ['bitcoin', 'ethereum'], []);
 
-    const newFav = favorites.filter((value, index, self) =>
-        index === self.findIndex((ind) => ind.name === value.name)
-    )
+    const filteredArray = useMemo(() => {
+        return favorites.filter(
+            (value, index, self) =>
+                index === self.findIndex((t) => t.name === value.name),
+        )
+    }, [favorites])
 
     const filteredAssetsArray = useMemo(() => {
         return assetsArray.slice().sort((a, b) => b.current_price - a.current_price)
@@ -48,11 +52,8 @@ const HomePage: React.FC = (): JSX.Element => {
         dispatch(getTopPriceData());
     }, [favoriteAssetNames, fetchData, dispatch]);
 
-    console.log('SingleAsset', assetsArray);
 
-
-    const renderFavBlock = newFav.map((elem: IChartData) => {
-        console.log('elem', elem);
+    const renderFavBlock = filteredArray.map((elem: IChartData) => {
         let currentPrice = 0;
         let priceChanges = 0;
         elem.singleAsset.forEach((elem: ISingleAsset) => {
@@ -92,8 +93,7 @@ const HomePage: React.FC = (): JSX.Element => {
             </Grid>
         </Grid>
         )
-    })
-    console.log('newfav',newFav);
+    });
     return (
         <>
             <Box className={classes.root}>
@@ -102,7 +102,7 @@ const HomePage: React.FC = (): JSX.Element => {
                 </Grid>
                 <Grid container className={classes.lineChart}>
                     <Grid item xs={12} sm={12} lg={12}>
-                        {newFav.length && <LineChart data={newFav} />}
+                        {filteredArray.length && <LineChart data={filteredArray} />}
                     </Grid>
                 </Grid>
                 <Grid container className={classes.topPriceContainer}>

@@ -8,7 +8,7 @@ import {
     ListItemText,
     ListItemIcon,
     Typography,
-    useTheme
+    useTheme,
 } from '@mui/material';
 import {
     ChevronLeftOutlined,
@@ -22,6 +22,8 @@ import SidebarLogo from '../../assets/images/sidebar/logo.svg'
 import { tokens } from '../../theme';
 import { useStyles } from './styles';
 import { ISidebarProps } from '../../common/types/sidebar';
+import SearchBar from '../search-bar';
+import ThemeSwitcher from '../theme-switcher';
 
 
 const SidebarComponent: React.FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
@@ -114,6 +116,12 @@ const SidebarComponent: React.FC<ISidebarProps> = (props: ISidebarProps): JSX.El
                                     )}
                                 </FlexBetween>
                             </Box>
+                            {!isNonMobile &&
+                                <List>
+                                    <ListItem >
+                                        <SearchBar />
+                                    </ListItem>
+                                </List>}
                             <List className={classes.navList}>
                                 {
                                     renderMenu
@@ -124,6 +132,15 @@ const SidebarComponent: React.FC<ISidebarProps> = (props: ISidebarProps): JSX.El
                             width='100%'
                         >
                             <List>
+                                {!isNonMobile &&
+                                    <ListItem sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-around'
+                                    }}>
+                                        <ThemeSwitcher />
+                                    </ListItem>
+                                }
                                 <ListItem>
                                     <ListItemButton
                                         sx={{
