@@ -8,7 +8,7 @@ import { ISingleAsset } from "../../common/types/assets";
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-const SearchBar = () => {
+const SearchBar: React.FC = (): JSX.Element => {
     const assetsArray: ISingleAsset[] = useAppSelector((state) => state.assets.assets);
     const [selectedValue, setSelectedValue] = useState<string | null>('');
     const navigate = useNavigate()
