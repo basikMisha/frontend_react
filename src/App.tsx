@@ -6,7 +6,7 @@ import { ColorModeContext, useMode } from "./theme"
 import { ThemeProvider, CssBaseline } from "@mui/material"
 import LayoutComponent from "./components/layout"
 import WatchlistComponent from "./pages/watchlist"
-import SettingsComponet from "./pages/settings"
+import SettingsPage from "./pages/settings"
 import NewsComponent from "./pages/news"
 import SingleAssetPage from "./pages/single-asset"
 
@@ -22,7 +22,7 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/watchlist" element={<WatchlistComponent />} />
-                <Route path="/settings" element={<SettingsComponet />} />
+                <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/news" element={<NewsComponent />} />
                 <Route path="/single/:id" element={<SingleAssetPage />} />
               </Route>
