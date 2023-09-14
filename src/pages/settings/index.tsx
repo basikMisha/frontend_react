@@ -7,6 +7,7 @@ import { useStyles } from './styles';
 import UserInfoComponent from '../../components/settings-user-info';
 import { useAppDispatch } from '../../utils/hook';
 import { getPublicUser } from '../../store/thunks/auth';
+import ChangePasswordComponent from '../../components/change-password';
 
 
 const SettingsPage = () => {
@@ -48,7 +49,7 @@ const SettingsPage = () => {
                     <UserInfoComponent/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Item Two
+                    <ChangePasswordComponent/>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     Item Three
