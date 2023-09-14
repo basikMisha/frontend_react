@@ -7,6 +7,8 @@ export const loginUser = createAsyncThunk(
     async (data: ILoginData, { rejectWithValue }) => {
         try {
             const user = await instance.post('auth/login', data);
+            console.log(user);
+            if(user.data.status === 400 || user.data.status === 401 || user.data.status === 500) return
             sessionStorage.setItem('token', user.data.token);
             sessionStorage.setItem('name', user.data.user.firstName);
             return user.data;
@@ -61,6 +63,21 @@ export const updateUserInfo = createAsyncThunk(
             const user = await instanceAuth.patch('users', data);
             sessionStorage.setItem('name', user.data.firstName);
             return user.data;
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(error.message)
+            }
+        }
+    }
+)
+
+export const updateUserPassword = createAsyncThunk(
+    'users/change-password',
+    async (data: {oldPassword: string, newPassword: string}, {rejectWithValue}) => {
+        try {
+            return await instanceAuth.patch('users/change-password', data);
         } catch (error: any) {
             if (error.response && error.response.data.message) {
                 return rejectWithValue(error.response.data.message)
