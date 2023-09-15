@@ -10,6 +10,8 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
+import { ILineChartProps } from '../../../common/types/assets';
+import React from 'react';
 
 ChartJS.register(
     CategoryScale,
@@ -23,7 +25,7 @@ ChartJS.register(
 
 
 
-const LineChart = (props: any) => {
+const LineChart: React.FC<ILineChartProps> = (props: ILineChartProps) => {
     const {data} = props;
     const options = {
         responsive: true,

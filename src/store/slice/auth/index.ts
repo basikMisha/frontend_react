@@ -2,25 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 import { IAuthState } from "../../../common/types/auth";
 import { getPublicUser, loginUser, registerUser } from "../../thunks/auth";
 
-const initialState: any = {
-    user: {
-        id: null,
-        firstName: '',
-        userName: '',
-        email: '',
-        createdAt: '',
-        updatedAt: '',
-        watchlist: [
-            {
-                id: null,
-                name: '',
-                assetId: '',
-                createdAt: '',
-                updatedAt: '',
-                user: null,
-            }
-        ]
-    },
+const initialState: IAuthState = {
+    user: [],
     isLogged: false,
     isLoading: false,
 }

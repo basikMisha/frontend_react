@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import { ISingleAsset } from '../../common/types/assets';
-import { Grid, Box, Avatar, Typography, Button, Snackbar, Alert, AlertColor } from '@mui/material';
+import { Grid, Avatar, Typography, Button, Snackbar, Alert, AlertColor } from '@mui/material';
 import FlexBetween from '../../components/flexBetween';
 import { useStyles } from './styles';
 import { addToWatchlist } from '../../store/thunks/assets';
@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 const SingleAssetPage: React.FC = (): JSX.Element => {
     const [open, setOpen] = useState(false);
+    const [error, setError] = useState(false)
     const [severity, setSeverity] = useState<AlertColor>('success');
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -29,12 +30,14 @@ const SingleAssetPage: React.FC = (): JSX.Element => {
                 data.assetId = singleAsset.id
             }
             dispatch(addToWatchlist(data));
+            setError(false);
             setSeverity('success');
             setOpen(true);
             setTimeout(() => {
                 setOpen(false);
             }, 4500);
         } catch (error: any) {
+            setError(true)
             setSeverity('error');
             setOpen(true);
             setTimeout(() => {
@@ -117,7 +120,7 @@ const SingleAssetPage: React.FC = (): JSX.Element => {
                     </Grid>
                     <Snackbar open={open}>
                         <Alert severity={severity} sx={{ width: '100%' }}>
-                            Добавлено в избранное
+                            {!error ? 'Добавлено в избранное' : 'Произошла ошибка'}
                         </Alert>
                     </Snackbar>
                 </Grid>

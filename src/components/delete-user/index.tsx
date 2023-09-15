@@ -5,9 +5,7 @@ import { useAppDispatch } from "../../utils/hook";
 import { DeleteUser } from "../../store/thunks/auth";
 import { useNavigate } from "react-router-dom";
 
-
-
-const DeleteUserComponent = () => {
+const DeleteUserComponent: React.FC = (): JSX.Element => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [checked, setChecked] = useState(false);

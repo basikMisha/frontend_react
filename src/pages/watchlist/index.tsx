@@ -6,7 +6,7 @@ import TableComponent from '../../components/table';
 import { Grid, Typography } from '@mui/material';
 import { useStyles } from './styles';
 
-const WatchlistComponent = () => {
+const WatchlistComponent: React.FC = (): JSX.Element => {
     const watchlist = useAppSelector((state) => state.watchlist.watchlist);
     const {assets} = useAppSelector((state) => state.assets);
     const dispatch = useAppDispatch();

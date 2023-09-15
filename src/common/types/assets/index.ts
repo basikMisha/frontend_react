@@ -2,6 +2,11 @@ export interface IAreaChartProps {
     data: number[][]
 }
 
+export interface ILineChartProps {
+    data: any
+}
+
+
 interface IRoi {
     times: number
     currency: string
@@ -41,4 +46,8 @@ export interface IChartData {
     name: string
     price_chart_data: number[][]
     singleAsset: ISingleAsset[]
+}
+
+export interface IPriceTableData {
+    assets: ISingleAsset[]
 }
