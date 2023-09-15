@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import { useStyles } from './styles';
 import { Grid, Box, TextField } from '@mui/material';
 import AppLoadingButton from '../loading-btn';
-import { updateUserInfo } from '../../store/thunks/auth';
+import { getPublicUser, updateUserInfo } from '../../store/thunks/auth';
 
-const UserInfoComponent = () => {
+const UserInfoComponent: React.FC = (): JSX.Element => {
     const { classes } = useStyles();
     const dispatch = useAppDispatch();
     const [firstName, setfirstName] = useState('');
@@ -30,6 +30,7 @@ const UserInfoComponent = () => {
             
         }
         dispatch(updateUserInfo(data));
+        dispatch(getPublicUser())
     }
 
     return (

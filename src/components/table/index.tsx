@@ -1,7 +1,9 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
 import { useStyles } from "./styles";
+import { IPriceTableData, ISingleAsset } from "../../common/types/assets";
+import React from "react";
 
-const TableComponent = (props: any) => {
+const TableComponent: React.FC<IPriceTableData> = (props: IPriceTableData): JSX.Element => {
     const {assets} = props;
     const {classes} = useStyles();
     return (
@@ -16,7 +18,7 @@ const TableComponent = (props: any) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {assets.map((elem: any) => (
+                    {assets.map((elem: ISingleAsset) => (
                         <TableRow
                             key={elem.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

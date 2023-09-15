@@ -1,11 +1,11 @@
 import { Grid, Box, TextField } from '@mui/material';
-import {useState} from 'react'
+import React, {useState} from 'react'
 import { useStyles } from './styles';
 import AppLoadingButton from '../loading-btn';
 import { useAppDispatch } from '../../utils/hook';
 import { updateUserPassword } from '../../store/thunks/auth';
 
-const ChangePasswordComponent = () => {
+const ChangePasswordComponent: React.FC = (): JSX.Element => {
     const [newPassword, setNewPassword] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const {classes} = useStyles();

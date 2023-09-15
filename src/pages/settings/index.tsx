@@ -11,7 +11,7 @@ import ChangePasswordComponent from '../../components/change-password';
 import DeleteUserComponent from '../../components/delete-user';
 
 
-const SettingsPage = () => {
+const SettingsPage: React.FC = (): JSX.Element => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const { classes } = useStyles();

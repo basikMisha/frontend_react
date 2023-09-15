@@ -23,7 +23,8 @@ TContext = any,
 }
 
 export interface IAuthState {
-    user: IPublicUser
+    // user: IPublicUser
+    user: any
     isLogged: boolean
     isLoading: boolean
 }
@@ -56,5 +57,5 @@ export interface IRegisterData {
     email: string
     password: string
     firstName: string
-    username: string
+    userName: string
 }

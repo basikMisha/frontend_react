@@ -1,10 +1,11 @@
 import { Grid, Box, Typography } from "@mui/material";
 import { getNews } from "../../store/thunks/news";
 import { useAppDispatch, useAppSelector } from "../../utils/hook";
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useStyles } from "./styles";
 import {Link} from 'react-router-dom';
-const NewsComponent = () => {
+
+const NewsComponent: React.FC = (): JSX.Element => {
   const { classes } = useStyles();
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.news);

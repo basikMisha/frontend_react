@@ -8,10 +8,12 @@ import {
     Tooltip,
     Filler,
     Legend,
+    ScriptableContext,
   } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import { IAreaChartProps } from '../../../common/types/assets';
+import React from 'react';
 
 ChartJS.register(
     CategoryScale,
@@ -30,7 +32,7 @@ ChartJS.register(
   
 
 
-const AreaChart = (props: IAreaChartProps) => {
+const AreaChart: React.FC<IAreaChartProps> = (props: IAreaChartProps)=> {
     const {data} = props;
     const options = {
         responsive: true,
