@@ -23,13 +23,15 @@ TContext = any,
 }
 
 export interface IAuthState {
-    // user: IPublicUser
-    user: any
+    user: {
+        user: IPublicUser
+        token: string
+    }
     isLogged: boolean
     isLoading: boolean
 }
 
-interface IPublicUser {
+export interface IPublicUser {
     id: number | null
     firstName: string
     userName: string

@@ -12,7 +12,6 @@ const TopBarComponent: React.FC<ITopBarProps> = (props: ITopBarProps): JSX.Eleme
     const { isOpen, setIsOpen, isNonMobile } = props;
 
     const { classes } = useStyles();
-    // const user = sessionStorage.getItem('name');
     
     const {user} = useAppSelector((state) => state.auth.user);
     return (
